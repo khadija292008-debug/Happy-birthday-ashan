@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday Ashan 🎂</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+    }
+    .book {
+      width: 100vw;
+      height: 100vh;
+      perspective: 1500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to top, #ff9966, #ff5e62); /* sunset vibes */
+    }
+    .pages {
+      width: 90%;
+      height: 90%;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+    .page {
+      width: 100%;
+      height: 100%;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      backface-visibility: hidden;
+      transform-origin: left;
+      transition: transform 1s;
+    }
+    .cake {
+      font-size: 100px;
+      animation: flicker 1s infinite;
+    }
+    @keyframes flicker {
+      0%, 100% { text-shadow: 0 -5px 10px yellow; }
+      50% { text-shadow: 0 -10px 20px orange; }
+    }
+    .typing {
+      border-right: 3px solid black;
+      white-space: pre-wrap;
+      overflow: hidden;
+      font-size: 1.2rem;
+      width: 80%;
+      text-align: center;
+    }
+    .friends {
+      font-size: 70px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background: #ff5e62;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+    button:hover {
+      background: #ff9966;
+    }
+  </style>
+</head>
+<body>
+  <div class="book">
+    <div class="pages">
+      <!-- Page 1: Cake -->
+      <div class="page" id="page1" style="z-index:3;">
+        <div class="cake">🎂🕯️</div>
+        <h1>Happy Birthday Ashan!</h1>
+        <button onclick="nextPage(1)">Next ➡️</button>
+      </div>
+
+      <!-- Page 2: Wishes -->
+      <div class="page" id="page2" style="z-index:2;">
+        <div class="typing" id="wishText"></div>
+        <button onclick="nextPage(2)">Next ➡️</button>
+      </div>
+
+      <!-- Page 3: Cartoon Friends -->
+      <div class="page" id="page3" style="z-index:1;">
+        <div class="friends">👩🎉👨</div>
+        <h2>Your friends are celebrating with you 🎈</h2>
+        <button onclick="restart()">🔄 Restart</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let wishes = "happy birthday kharusss 🎊 may you live long oar aaj bach k rehna oar kitna lamba hona he btw? You are the most sughar man I've ever seen in my life hehe from your madam ji";
+    let i = 0;
+
+    function nextPage(p) {
+      document.getElementById("page"+p).style.transform = "rotateY(-180deg)";
+      if (p === 1) setTimeout(typeWriter, 1000);
+    }
+
+    function typeWriter() {
+      if (i < wishes.length) {
+        document.getElementById("wishText").innerHTML += wishes.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50);
+      }
+    }
+
+    function restart() {
+      // Reset pages
+      document.querySelectorAll(".page").forEach(pg => pg.style.transform = "rotateY(0deg)");
+      // Reset typing
+      document.getElementById("wishText").innerHTML = "";
+      i = 0;
+    }
+  </script>
+</body>
+</html>
